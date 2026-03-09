@@ -32,37 +32,37 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Header */}
-      <header className="border-b border-border/60 bg-card/50 backdrop-blur-sm">
-        <div className="mx-auto max-w-4xl px-6 py-5 flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-hero">
+      {/* Compact Mobile Header */}
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-card/80 backdrop-blur-md">
+        <div className="mx-auto max-w-4xl px-4 py-3 sm:px-6 sm:py-4 flex items-center gap-2.5">
+          <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-hero">
             <Globe className="h-4 w-4 text-primary-foreground" />
           </div>
-          <h1 className="font-display text-xl text-foreground">SoloHer</h1>
+          <h1 className="font-display text-lg sm:text-xl text-foreground">SoloHer</h1>
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-6 py-12">
-        {/* Hero Section */}
-        <section className="mb-12 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-sm font-medium text-muted-foreground">
-            <ShieldCheck className="h-4 w-4 text-accent" />
+      <main className="mx-auto max-w-4xl px-4 py-6 sm:px-6 sm:py-12">
+        {/* Hero — compact on mobile */}
+        <section className="mb-6 sm:mb-12 text-center">
+          <div className="mb-3 sm:mb-4 inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium text-muted-foreground">
+            <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent" />
             AI-Powered Travel Confidence
           </div>
-          <h1 className="font-display text-4xl leading-tight text-foreground sm:text-5xl mb-4">
+          <h1 className="font-display text-3xl leading-tight text-foreground sm:text-5xl mb-2 sm:mb-4">
             Travel boldly.<br />
             <span className="text-gradient-hero">Travel informed.</span>
           </h1>
-          <p className="mx-auto max-w-lg text-lg text-muted-foreground leading-relaxed">
-            Get personalized safety insights and practical tips for any destination — designed for women who explore the world solo.
+          <p className="mx-auto max-w-lg text-base sm:text-lg text-muted-foreground leading-relaxed">
+            Safety insights & tips for solo female travelers.
           </p>
         </section>
 
-        {/* Form + Results Layout */}
-        <div className="grid gap-12 lg:grid-cols-5">
+        {/* Mobile: stacked. Desktop: side-by-side */}
+        <div className="space-y-6 lg:grid lg:grid-cols-5 lg:gap-12 lg:space-y-0">
           <div className="lg:col-span-2">
-            <div className="sticky top-8 rounded-2xl border border-border/60 bg-card p-6 shadow-card">
-              <h2 className="font-display text-lg text-foreground mb-5">Plan Your Visit</h2>
+            <div className="lg:sticky lg:top-20 rounded-2xl border border-border/60 bg-card p-4 sm:p-6 shadow-card">
+              <h2 className="font-display text-lg text-foreground mb-4 sm:mb-5">Plan Your Visit</h2>
               <TravelForm onSubmit={handleSubmit} isLoading={isLoading} />
             </div>
           </div>
@@ -71,11 +71,11 @@ const Index = () => {
             {guide ? (
               <GuideResults guide={guide} />
             ) : (
-              <div className="flex min-h-[400px] items-center justify-center rounded-2xl border border-dashed border-border/60 bg-card/30">
-                <div className="text-center px-6">
-                  <Globe className="mx-auto mb-4 h-12 w-12 text-muted-foreground/30" />
-                  <p className="text-muted-foreground font-medium">Your Travel Confidence Guide will appear here</p>
-                  <p className="mt-1 text-sm text-muted-foreground/60">Enter a destination to get started</p>
+              <div className="flex min-h-[200px] sm:min-h-[400px] items-center justify-center rounded-2xl border border-dashed border-border/60 bg-card/30">
+                <div className="text-center px-4">
+                  <Globe className="mx-auto mb-3 h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground/30" />
+                  <p className="text-sm sm:text-base text-muted-foreground font-medium">Your guide will appear here</p>
+                  <p className="mt-1 text-xs sm:text-sm text-muted-foreground/60">Enter a destination to get started</p>
                 </div>
               </div>
             )}
