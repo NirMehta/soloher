@@ -1,13 +1,17 @@
 import { useState } from "react";
 import TravelForm from "@/components/TravelForm";
 import GuideResults, { GuideData } from "@/components/GuideResults";
+import SavedGuides from "@/components/SavedGuides";
+import { useSavedGuides } from "@/hooks/use-saved-guides";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Globe, ShieldCheck } from "lucide-react";
+import { Globe, ShieldCheck, Bookmark, BookmarkCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [guide, setGuide] = useState<GuideData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { guides: savedGuides, saveGuide, removeGuide, isGuideSaved } = useSavedGuides();
 
   const handleSubmit = async (data: { city: string; place: string; time: string }) => {
     setIsLoading(true);
@@ -29,6 +33,19 @@ const Index = () => {
       setIsLoading(false);
     }
   };
+
+  const handleSaveOffline = () => {
+    if (!guide) return;
+    saveGuide(guide);
+    toast.success("Guide saved for offline access!");
+  };
+
+  const handleViewSaved = (g: GuideData) => {
+    setGuide(g);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const alreadySaved = guide ? isGuideSaved(guide) : false;
 
   return (
     <div className="min-h-screen bg-background">
@@ -69,7 +86,27 @@ const Index = () => {
 
           <div className="lg:col-span-3">
             {guide ? (
-              <GuideResults guide={guide} />
+              <div className="space-y-4">
+                <GuideResults guide={guide} />
+                <Button
+                  variant={alreadySaved ? "secondary" : "hero"}
+                  className="w-full"
+                  onClick={handleSaveOffline}
+                  disabled={alreadySaved}
+                >
+                  {alreadySaved ? (
+                    <>
+                      <BookmarkCheck className="h-4 w-4 mr-2" />
+                      Saved Offline
+                    </>
+                  ) : (
+                    <>
+                      <Bookmark className="h-4 w-4 mr-2" />
+                      Save Offline Guide
+                    </>
+                  )}
+                </Button>
+              </div>
             ) : (
               <div className="flex min-h-[200px] sm:min-h-[400px] items-center justify-center rounded-2xl border border-dashed border-border/60 bg-card/30">
                 <div className="text-center px-4">
@@ -81,6 +118,13 @@ const Index = () => {
             )}
           </div>
         </div>
+
+        {/* Saved Guides Section */}
+        <SavedGuides
+          guides={savedGuides}
+          onView={handleViewSaved}
+          onRemove={removeGuide}
+        />
       </main>
     </div>
   );
