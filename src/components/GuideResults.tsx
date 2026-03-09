@@ -83,7 +83,7 @@ const CollapsibleSection = ({
             {bullets.map((point, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                 <CheckCircle2 className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-accent" />
-                <span>{point}</span>
+                <span className="break-words">{point}</span>
               </li>
             ))}
           </ul>
