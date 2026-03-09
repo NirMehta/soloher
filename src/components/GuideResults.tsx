@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Shield, Sun, Bus, Lightbulb, MapPin, Clock, Car, CheckCircle2 } from "lucide-react";
+import { Shield, Sun, Bus, Lightbulb, MapPin, Clock, Car, CheckCircle2, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface GuideData {
   city: string;
@@ -9,10 +11,10 @@ export interface GuideData {
   bestTimeShort: string;
   safetyNotes: string[];
   travelConvenience: "Very Easy" | "Easy" | "Moderate" | "Challenging";
-  safety: string;
-  bestTimes: string;
-  transportation: string;
-  tips: string;
+  safety: string[] | string;
+  bestTimes: string[] | string;
+  transportation: string[] | string;
+  tips: string[] | string;
 }
 
 const confidenceColors: Record<string, string> = {
@@ -34,6 +36,62 @@ const sections = [
   { key: "transportation" as const, title: "Transportation & Logistics", icon: Bus, color: "text-primary" },
   { key: "tips" as const, title: "Practical Tips", icon: Lightbulb, color: "text-accent" },
 ];
+
+function toBullets(value: string[] | string): string[] {
+  if (Array.isArray(value)) return value;
+  return value.split(/\n+/).filter(Boolean);
+}
+
+const CollapsibleSection = ({
+  title,
+  icon: Icon,
+  color,
+  bullets,
+}: {
+  title: string;
+  icon: React.ElementType;
+  color: string;
+  bullets: string[];
+}) => {
+  const [open, setOpen] = useState(false);
+  const preview = bullets[0] || "";
+
+  return (
+    <Card
+      className="shadow-card border-border/60 bg-card cursor-pointer transition-shadow duration-300 hover:shadow-soft"
+      onClick={() => setOpen((v) => !v)}
+    >
+      <CardHeader className="p-4 sm:p-5 pb-0 sm:pb-0">
+        <CardTitle className="flex items-center justify-between text-sm sm:text-base font-body font-semibold">
+          <span className="flex items-center gap-2">
+            <Icon className={cn("h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0", color)} />
+            {title}
+          </span>
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 text-muted-foreground transition-transform duration-200",
+              open && "rotate-180"
+            )}
+          />
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-4 pt-2 sm:p-5 sm:pt-2">
+        {!open ? (
+          <p className="text-sm text-muted-foreground truncate">{preview}</p>
+        ) : (
+          <ul className="space-y-2">
+            {bullets.map((point, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <CheckCircle2 className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-accent" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
 
 const GuideResults = ({ guide }: { guide: GuideData }) => {
   return (
@@ -58,7 +116,6 @@ const GuideResults = ({ guide }: { guide: GuideData }) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0 space-y-4">
-          {/* Badges row */}
           <div className="flex flex-wrap gap-2 pt-3">
             <div className="space-y-1">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Confidence</p>
@@ -74,14 +131,10 @@ const GuideResults = ({ guide }: { guide: GuideData }) => {
               </Badge>
             </div>
           </div>
-
-          {/* Best time */}
           <div className="flex items-start gap-2">
             <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 text-accent" />
             <p className="text-sm text-muted-foreground">{guide.bestTimeShort}</p>
           </div>
-
-          {/* Safety notes */}
           <div className="space-y-2">
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Key Safety Notes</p>
             <ul className="space-y-1.5">
@@ -96,22 +149,16 @@ const GuideResults = ({ guide }: { guide: GuideData }) => {
         </CardContent>
       </Card>
 
-      {/* Detailed sections */}
+      {/* Collapsible detailed sections */}
       <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
-        {sections.map(({ key, title, icon: Icon, color }) => (
-          <Card key={key} className="shadow-card border-border/60 bg-card hover:shadow-soft transition-shadow duration-300">
-            <CardHeader className="p-4 pb-2 sm:p-6 sm:pb-3">
-              <CardTitle className="flex items-center gap-2 text-sm sm:text-base font-body font-semibold">
-                <Icon className={`h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0 ${color}`} />
-                {title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
-              <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
-                {guide[key]}
-              </p>
-            </CardContent>
-          </Card>
+        {sections.map(({ key, title, icon, color }) => (
+          <CollapsibleSection
+            key={key}
+            title={title}
+            icon={icon}
+            color={color}
+            bullets={toBullets(guide[key])}
+          />
         ))}
       </div>
     </div>

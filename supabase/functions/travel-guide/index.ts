@@ -55,7 +55,7 @@ serve(async (req) => {
       messages: [
         {
           role: "system",
-          content: `You are an expert solo female travel safety advisor. Given a destination city and specific place, provide a comprehensive travel confidence guide. Always be encouraging while being honest about safety. Focus on empowerment, not fear. Return JSON with these keys: confidenceLevel (High/Moderate/Low), bestTimeShort (one short sentence), safetyNotes (array of exactly 3 short bullet points), travelConvenience (Very Easy/Easy/Moderate/Challenging), safety, bestTimes, transportation, tips. The detailed fields (safety, bestTimes, transportation, tips) should each be 3-5 sentences of practical, specific advice. Do not use markdown formatting in the values.`,
+          content: `You are an expert solo female travel safety advisor. Given a destination city and specific place, provide a comprehensive travel confidence guide. Always be encouraging while being honest about safety. Focus on empowerment, not fear. Return JSON with these keys: confidenceLevel (High/Moderate/Low), bestTimeShort (one short sentence), safetyNotes (array of exactly 3 short bullet points), travelConvenience (Very Easy/Easy/Moderate/Challenging), safety (array of 3-5 bullet points), bestTimes (array of 3-5 bullet points), transportation (array of 3-5 bullet points), tips (array of 3-5 bullet points). Each bullet point should be one concise, actionable sentence. Do not use markdown formatting.`,
         },
         {
           role: "user",
@@ -75,10 +75,10 @@ serve(async (req) => {
                 bestTimeShort: { type: "string", description: "One short sentence about the best time to visit" },
                 safetyNotes: { type: "array", items: { type: "string" }, description: "Exactly 3 short key safety bullet points" },
                 travelConvenience: { type: "string", enum: ["Very Easy", "Easy", "Moderate", "Challenging"], description: "How convenient is it to travel here" },
-                safety: { type: "string", description: "Safety considerations for solo female travelers" },
-                bestTimes: { type: "string", description: "Best times to visit this specific place" },
-                transportation: { type: "string", description: "Transportation and logistics advice" },
-                tips: { type: "string", description: "Practical tips for solo female travelers" },
+                safety: { type: "array", items: { type: "string" }, description: "3-5 bullet points about safety considerations" },
+                bestTimes: { type: "array", items: { type: "string" }, description: "3-5 bullet points about best times to visit" },
+                transportation: { type: "array", items: { type: "string" }, description: "3-5 bullet points about transportation and logistics" },
+                tips: { type: "array", items: { type: "string" }, description: "3-5 bullet points of practical tips" },
               },
               required: ["confidenceLevel", "bestTimeShort", "safetyNotes", "travelConvenience", "safety", "bestTimes", "transportation", "tips"],
               additionalProperties: false,
