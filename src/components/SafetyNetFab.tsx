@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { ShieldAlert, Phone, CheckSquare, MapPin, Navigation, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle as AlertTitle,
+} from "@/components/ui/alert-dialog";
 import { cn } from "@/lib/utils";
 
 interface SafetyNetData {
@@ -45,6 +54,12 @@ const Section = ({
 
 const SafetyNetFab = ({ emergencyNumber, safetyNet, city }: SafetyNetFabProps) => {
   const [open, setOpen] = useState(false);
+  const [confirmCall, setConfirmCall] = useState(false);
+
+  const handleConfirmCall = () => {
+    setConfirmCall(false);
+    window.location.href = `tel:${emergencyNumber}`;
+  };
 
   return (
     <>
@@ -79,21 +94,22 @@ const SafetyNetFab = ({ emergencyNumber, safetyNet, city }: SafetyNetFabProps) =
 
           {/* Scrollable content */}
           <div className="overflow-y-auto flex-1 px-4 py-5 space-y-6">
-            {/* Emergency call button */}
-            <a
-              href={`tel:${emergencyNumber}`}
-              className="flex items-center gap-4 p-4 rounded-xl bg-destructive/10 border-2 border-destructive/30 active:bg-destructive/20 transition-colors"
+            {/* Emergency call banner */}
+            <button
+              type="button"
+              onClick={() => setConfirmCall(true)}
+              className="flex w-full items-center gap-4 p-4 rounded-xl bg-destructive/10 border-2 border-destructive/30 active:bg-destructive/20 transition-colors text-left"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-destructive text-destructive-foreground flex-shrink-0">
                 <Phone className="h-6 w-6" />
               </div>
               <div>
                 <p className="text-lg font-bold text-foreground">
-                  Call {emergencyNumber}
+                  Call Emergency Services
                 </p>
-                <p className="text-sm text-muted-foreground">Tap to call emergency services</p>
+                <p className="text-sm text-muted-foreground">Opens your phone dialer with the local emergency number</p>
               </div>
-            </a>
+            </button>
 
             <Section
               icon={CheckSquare}
@@ -118,6 +134,27 @@ const SafetyNetFab = ({ emergencyNumber, safetyNet, city }: SafetyNetFabProps) =
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Confirmation dialog */}
+      <AlertDialog open={confirmCall} onOpenChange={setConfirmCall}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertTitle>Call emergency services?</AlertTitle>
+            <AlertDialogDescription>
+              SoloHer will open your phone dialer with the local emergency number for this location.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleConfirmCall}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Call now
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };
