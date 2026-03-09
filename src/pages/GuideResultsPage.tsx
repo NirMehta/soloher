@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GuideResults, { GuideData } from "@/components/GuideResults";
+import SafetyNet from "@/components/SafetyNet";
 import { useSavedGuides } from "@/hooks/use-saved-guides";
 import { toast } from "sonner";
 import { ArrowLeft, Bookmark, BookmarkCheck } from "lucide-react";
