@@ -55,7 +55,7 @@ serve(async (req) => {
       messages: [
         {
           role: "system",
-          content: `You are an expert solo female travel safety advisor. Given a destination city and specific place, provide a comprehensive travel confidence guide. Always be encouraging while being honest about safety. Focus on empowerment, not fear. Return JSON with these keys: confidenceLevel (High/Moderate/Low), bestTimeShort (one short sentence), safetyNotes (array of exactly 3 short bullet points), travelConvenience (Very Easy/Easy/Moderate/Challenging), safety (array of 3-5 bullet points), bestTimes (array of 3-5 bullet points), transportation (array of 3-5 bullet points), tips (array of 3-5 bullet points). Each bullet point should be one concise, actionable sentence. Do not use markdown formatting.`,
+           content: `You are an expert solo female travel safety advisor. Given a destination city and specific place, provide a comprehensive travel confidence guide. Always be encouraging while being honest about safety. Focus on empowerment, not fear. Return JSON with these keys: confidenceLevel (High/Moderate/Low), bestTimeShort (one short sentence), safetyNotes (array of exactly 3 short bullet points), travelConvenience (Very Easy/Easy/Moderate/Challenging), safety (array of 3-5 bullet points), bestTimes (array of 3-5 bullet points), transportation (array of 3-5 bullet points), tips (array of 3-5 bullet points), emergencyNumber (local emergency number as a string), safetyNet (object with quickActions: 3-4 immediate steps if feeling unsafe, safePlaces: 3-4 nearby safe place types, returnSafely: 3-4 tips for getting back safely). Each bullet point should be one concise actionable sentence. Do not use markdown formatting.`,
         },
         {
           role: "user",
@@ -79,8 +79,19 @@ serve(async (req) => {
                 bestTimes: { type: "array", items: { type: "string" }, description: "3-5 bullet points about best times to visit" },
                 transportation: { type: "array", items: { type: "string" }, description: "3-5 bullet points about transportation and logistics" },
                 tips: { type: "array", items: { type: "string" }, description: "3-5 bullet points of practical tips" },
+                emergencyNumber: { type: "string", description: "Local emergency phone number" },
+                safetyNet: {
+                  type: "object",
+                  properties: {
+                    quickActions: { type: "array", items: { type: "string" }, description: "3-4 immediate steps if feeling unsafe" },
+                    safePlaces: { type: "array", items: { type: "string" }, description: "3-4 types of nearby safe places" },
+                    returnSafely: { type: "array", items: { type: "string" }, description: "3-4 tips for getting back safely" },
+                  },
+                  required: ["quickActions", "safePlaces", "returnSafely"],
+                  additionalProperties: false,
+                },
               },
-              required: ["confidenceLevel", "bestTimeShort", "safetyNotes", "travelConvenience", "safety", "bestTimes", "transportation", "tips"],
+              required: ["confidenceLevel", "bestTimeShort", "safetyNotes", "travelConvenience", "safety", "bestTimes", "transportation", "tips", "emergencyNumber", "safetyNet"],
               additionalProperties: false,
             },
           },
