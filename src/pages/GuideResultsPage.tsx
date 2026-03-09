@@ -49,6 +49,16 @@ const GuideResultsPage = () => {
 
       <GuideResults guide={guide} />
 
+      {guide.emergencyNumber && guide.safetyNet && (
+        <div className="mt-4">
+          <SafetyNet
+            emergencyNumber={guide.emergencyNumber}
+            safetyNet={guide.safetyNet}
+            city={guide.city}
+          />
+        </div>
+      )}
+
       <div className="mt-4 pb-20">
         <Button
           variant={alreadySaved ? "secondary" : "hero"}

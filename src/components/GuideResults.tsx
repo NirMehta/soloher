@@ -4,6 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Shield, Sun, Bus, Lightbulb, MapPin, Clock, Car, CheckCircle2, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+export interface SafetyNetData {
+  quickActions: string[];
+  safePlaces: string[];
+  returnSafely: string[];
+}
+
 export interface GuideData {
   city: string;
   place: string;
@@ -15,6 +21,8 @@ export interface GuideData {
   bestTimes: string[] | string;
   transportation: string[] | string;
   tips: string[] | string;
+  emergencyNumber?: string;
+  safetyNet?: SafetyNetData;
 }
 
 const confidenceColors: Record<string, string> = {
