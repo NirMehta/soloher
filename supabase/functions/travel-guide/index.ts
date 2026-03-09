@@ -71,12 +71,16 @@ serve(async (req) => {
             parameters: {
               type: "object",
               properties: {
+                confidenceLevel: { type: "string", enum: ["High", "Moderate", "Low"], description: "Overall safety confidence level for solo female travelers" },
+                bestTimeShort: { type: "string", description: "One short sentence about the best time to visit" },
+                safetyNotes: { type: "array", items: { type: "string" }, description: "Exactly 3 short key safety bullet points" },
+                travelConvenience: { type: "string", enum: ["Very Easy", "Easy", "Moderate", "Challenging"], description: "How convenient is it to travel here" },
                 safety: { type: "string", description: "Safety considerations for solo female travelers" },
                 bestTimes: { type: "string", description: "Best times to visit this specific place" },
                 transportation: { type: "string", description: "Transportation and logistics advice" },
                 tips: { type: "string", description: "Practical tips for solo female travelers" },
               },
-              required: ["safety", "bestTimes", "transportation", "tips"],
+              required: ["confidenceLevel", "bestTimeShort", "safetyNotes", "travelConvenience", "safety", "bestTimes", "transportation", "tips"],
               additionalProperties: false,
             },
           },
