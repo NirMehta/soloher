@@ -58,32 +58,32 @@ const CollapsibleSection = ({
 
   return (
     <Card
-      className="shadow-card border-border/60 bg-card cursor-pointer transition-shadow duration-300 hover:shadow-soft"
+      className="shadow-card border-border/60 bg-card cursor-pointer transition-shadow duration-300 hover:shadow-soft overflow-hidden"
       onClick={() => setOpen((v) => !v)}
     >
       <CardHeader className="p-4 sm:p-5 pb-0 sm:pb-0">
         <CardTitle className="flex items-center justify-between text-sm sm:text-base font-body font-semibold">
-          <span className="flex items-center gap-2">
+          <span className="flex items-center gap-2 min-w-0">
             <Icon className={cn("h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0", color)} />
-            {title}
+            <span className="truncate">{title}</span>
           </span>
           <ChevronDown
             className={cn(
-              "h-4 w-4 text-muted-foreground transition-transform duration-200",
+              "h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform duration-200",
               open && "rotate-180"
             )}
           />
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-4 pt-2 sm:p-5 sm:pt-2">
+      <CardContent className="p-4 pt-2 sm:p-5 sm:pt-2 overflow-hidden">
         {!open ? (
           <p className="text-sm text-muted-foreground truncate">{preview}</p>
         ) : (
-          <ul className="space-y-2">
+          <ul className="space-y-2 min-w-0">
             {bullets.map((point, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground min-w-0">
                 <CheckCircle2 className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-accent" />
-                <span className="break-words">{point}</span>
+                <span className="break-words overflow-wrap-anywhere" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>{point}</span>
               </li>
             ))}
           </ul>
