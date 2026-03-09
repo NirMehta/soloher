@@ -1,0 +1,4 @@
+project_id = "vgdlainccsxmmvvzxvcx"
+
+[functions.travel-guide]
+verify_jwt = false
