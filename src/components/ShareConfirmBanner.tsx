@@ -13,7 +13,7 @@ const ShareConfirmBanner = ({ shareText, onDismiss }: ShareConfirmBannerProps) =
     const timer = setTimeout(() => {
       setVisible(false);
       onDismiss();
-    }, 4000);
+    }, 10000);
     return () => clearTimeout(timer);
   }, [onDismiss]);
 
