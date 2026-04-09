@@ -54,7 +54,7 @@ const SavedGuides = ({ guides, onView, onRemove }: SavedGuidesProps) => {
                   size="icon"
                   className="h-8 w-8 text-destructive hover:text-destructive"
                   onClick={() => onRemove(guide.id)}
-                  aria-label="Remove guide"
+                  aria-label="Delete saved guide"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>

@@ -25,6 +25,8 @@ const ShareConfirmBanner = ({ shareText, onDismiss }: ShareConfirmBannerProps) =
     <div
       onClick={() => { setVisible(false); onDismiss(); }}
       className="fixed top-4 left-4 right-4 z-50 mx-auto max-w-md rounded-xl border border-primary/20 bg-background p-4 shadow-card animate-in fade-in-0 slide-in-from-top-3 duration-300 cursor-pointer"
+      role="status"
+      aria-live="polite"
     >
       <div className="flex items-start gap-3">
         <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />

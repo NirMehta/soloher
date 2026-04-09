@@ -100,6 +100,7 @@ const GuideResultsPage = () => {
           className="w-full"
           onClick={handleSave}
           disabled={alreadySaved}
+          aria-label="Save guide for offline access"
         >
           {alreadySaved ? (
             <>

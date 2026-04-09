@@ -67,7 +67,7 @@ const SafetyNetFab = ({ emergencyNumber, safetyNet, city }: SafetyNetFabProps) =
       <button
         onClick={() => setOpen(true)}
         className="fixed bottom-20 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-destructive text-destructive-foreground shadow-lg active:scale-95 transition-transform"
-        aria-label="Open Safety Net"
+        aria-label="Open Safety Net emergency assistance"
       >
         <ShieldAlert className="h-6 w-6" />
       </button>
