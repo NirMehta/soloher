@@ -7,9 +7,11 @@ import { toast } from "sonner";
 import { ArrowLeft, Bookmark, BookmarkCheck, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { saveSharedPlan } from "@/hooks/use-shared-plan";
+import ShareConfirmBanner from "@/components/ShareConfirmBanner";
 
 const GuideResultsPage = () => {
   const [guide, setGuide] = useState<GuideData | null>(null);
+  const [shareBanner, setShareBanner] = useState<{ text: string } | null>(null);
   const navigate = useNavigate();
   const { saveGuide, isGuideSaved } = useSavedGuides();
 
@@ -55,7 +57,7 @@ const GuideResultsPage = () => {
     if (!shared) {
       try {
         await navigator.clipboard.writeText(text);
-        toast.success("Plan copied to clipboard — paste it in your messaging app!");
+        setShareBanner({ text });
       } catch {
         // Last resort: mailto
         window.open(`mailto:?subject=${encodeURIComponent(`My plan: ${guide.place}`)}&body=${encodeURIComponent(text)}`, "_blank");
@@ -74,6 +76,12 @@ const GuideResultsPage = () => {
 
   return (
     <div className="px-4 py-4 sm:px-6 sm:py-8 max-w-2xl mx-auto">
+      {shareBanner && (
+        <ShareConfirmBanner
+          shareText={shareBanner.text}
+          onDismiss={() => setShareBanner(null)}
+        />
+      )}
       <Button
         variant="ghost"
         size="sm"
