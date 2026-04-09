@@ -30,7 +30,7 @@ const SavedGuidesPage = () => {
           <Inbox className="h-12 w-12 text-muted-foreground/30 mb-3" />
           <p className="text-sm text-muted-foreground font-medium">No saved guides yet</p>
           <p className="text-xs text-muted-foreground/60 mt-1">
-            Generate a guide and save it for offline access
+            Save a guide before your next trip — it'll be available even without signal
           </p>
           <Button variant="hero" className="mt-5" onClick={() => navigate("/")}>
             Search a Destination
