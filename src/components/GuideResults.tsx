@@ -68,6 +68,10 @@ const CollapsibleSection = ({
     <Card
       className="shadow-card border-border/60 bg-card cursor-pointer transition-shadow duration-300 hover:shadow-soft overflow-hidden"
       onClick={() => setOpen((v) => !v)}
+      role="button"
+      tabIndex={0}
+      aria-expanded={open}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen((v) => !v); } }}
     >
       <CardHeader className="p-4 sm:p-5 pb-0 sm:pb-0">
         <CardTitle className="flex items-center justify-between text-sm sm:text-base font-body font-semibold">
@@ -127,13 +131,13 @@ const GuideResults = ({ guide }: { guide: GuideData }) => {
           <div className="flex flex-wrap gap-2 pt-3">
             <div className="space-y-1">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Confidence</p>
-              <Badge className={`${confidenceColors[guide.confidenceLevel]} text-xs px-3 py-1`}>
+              <Badge className={`${confidenceColors[guide.confidenceLevel]} text-xs px-3 py-1`} role="status" aria-label={`Confidence level: ${guide.confidenceLevel}`}>
                 {guide.confidenceLevel}
               </Badge>
             </div>
             <div className="space-y-1">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Travel Ease</p>
-              <Badge className={`${convenienceColors[guide.travelConvenience]} text-xs px-3 py-1`}>
+              <Badge className={`${convenienceColors[guide.travelConvenience]} text-xs px-3 py-1`} role="status" aria-label={`Travel ease: ${guide.travelConvenience}`}>
                 <Car className="h-3 w-3 mr-1" />
                 {guide.travelConvenience}
               </Badge>
