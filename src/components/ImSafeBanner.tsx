@@ -18,20 +18,31 @@ const ImSafeBanner = () => {
   const handleReassurance = async () => {
     const text = `Back safe from ${plan.place} in ${plan.city}! Felt confident the whole time — SoloHer's tips really helped. All good.`;
 
-    try {
-      if (navigator.share) {
+    let shared = false;
+
+    if (navigator.share) {
+      try {
         await navigator.share({ text });
-      } else {
-        window.location.href = `mailto:?body=${encodeURIComponent(text)}`;
+        shared = true;
+      } catch (e) {
+        if ((e as DOMException)?.name === "AbortError") return;
       }
-    } catch (e) {
-      // User cancelled share — that's fine
-      if ((e as DOMException)?.name === "AbortError") return;
+    }
+
+    if (!shared) {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast.success("Reassurance copied to clipboard — paste it in your messaging app!");
+      } catch {
+        window.open(`mailto:?body=${encodeURIComponent(text)}`, "_blank");
+        toast.success("Opening email to send reassurance!");
+      }
+    } else {
+      toast.success("Reassurance sent!");
     }
 
     clearSharedPlan();
     setPlan(null);
-    toast.success("Reassurance sent!");
   };
 
   const handleDismiss = () => {
