@@ -38,18 +38,34 @@ const GuideResultsPage = () => {
     const emergency = guide.emergencyNumber || "local emergency services";
     const text = `Hey, heading to ${guide.place} in ${guide.city} today. SoloHer rates it ${guide.confidenceLevel} confidence. Key tip: ${firstNote} Local emergency number: ${emergency}. I'll message when I'm back.`;
 
-    try {
-      if (navigator.share) {
+    let shared = false;
+
+    // Try native share sheet first
+    if (navigator.share) {
+      try {
         await navigator.share({ text });
-      } else {
-        window.location.href = `mailto:?subject=${encodeURIComponent(`My plan: ${guide.place}`)}&body=${encodeURIComponent(text)}`;
+        shared = true;
+      } catch (e) {
+        if ((e as DOMException)?.name === "AbortError") return;
+        // Fall through to clipboard fallback
       }
-      saveSharedPlan(guide.place, guide.city);
-      toast.success("Plan shared!");
-    } catch (e) {
-      if ((e as DOMException)?.name === "AbortError") return;
-      toast.error("Could not share plan.");
     }
+
+    // Fallback: copy to clipboard
+    if (!shared) {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast.success("Plan copied to clipboard — paste it in your messaging app!");
+      } catch {
+        // Last resort: mailto
+        window.open(`mailto:?subject=${encodeURIComponent(`My plan: ${guide.place}`)}&body=${encodeURIComponent(text)}`, "_blank");
+        toast.success("Opening email to share your plan!");
+      }
+    } else {
+      toast.success("Plan shared!");
+    }
+
+    saveSharedPlan(guide.place, guide.city);
   };
 
   if (!guide) return null;
