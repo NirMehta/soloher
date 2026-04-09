@@ -4,8 +4,9 @@ import GuideResults, { GuideData } from "@/components/GuideResults";
 import SafetyNetFab from "@/components/SafetyNetFab";
 import { useSavedGuides } from "@/hooks/use-saved-guides";
 import { toast } from "sonner";
-import { ArrowLeft, Bookmark, BookmarkCheck } from "lucide-react";
+import { ArrowLeft, Bookmark, BookmarkCheck, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { saveSharedPlan } from "@/hooks/use-shared-plan";
 
 const GuideResultsPage = () => {
   const [guide, setGuide] = useState<GuideData | null>(null);
@@ -31,6 +32,26 @@ const GuideResultsPage = () => {
     toast.success("Guide saved for offline access!");
   };
 
+  const handleShare = async () => {
+    if (!guide) return;
+    const firstNote = guide.safetyNotes?.[0] || "Stay aware of your surroundings.";
+    const emergency = guide.emergencyNumber || "local emergency services";
+    const text = `Hey, heading to ${guide.place} in ${guide.city} today. SoloHer rates it ${guide.confidenceLevel} confidence. Key tip: ${firstNote} Local emergency number: ${emergency}. I'll message when I'm back.`;
+
+    try {
+      if (navigator.share) {
+        await navigator.share({ text });
+      } else {
+        window.location.href = `mailto:?subject=${encodeURIComponent(`My plan: ${guide.place}`)}&body=${encodeURIComponent(text)}`;
+      }
+      saveSharedPlan(guide.place, guide.city);
+      toast.success("Plan shared!");
+    } catch (e) {
+      if ((e as DOMException)?.name === "AbortError") return;
+      toast.error("Could not share plan.");
+    }
+  };
+
   if (!guide) return null;
 
   const alreadySaved = isGuideSaved(guide);
@@ -49,7 +70,7 @@ const GuideResultsPage = () => {
 
       <GuideResults guide={guide} />
 
-      <div className="mt-4 pb-20">
+      <div className="mt-4 pb-20 space-y-3">
         <Button
           variant={alreadySaved ? "secondary" : "hero"}
           className="w-full"
@@ -67,6 +88,14 @@ const GuideResultsPage = () => {
               Save Offline Guide
             </>
           )}
+        </Button>
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={handleShare}
+        >
+          <Share2 className="h-4 w-4 mr-2" />
+          Share My Plan
         </Button>
       </div>
 
