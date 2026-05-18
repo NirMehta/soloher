@@ -142,6 +142,7 @@ const GuideResultsPage = () => {
         />
       )}
     </div>
+    </>
   );
 };
 
