@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useSavedGuides } from "@/hooks/use-saved-guides";
 import type { GuideData } from "@/components/GuideResults";
 import { Card, CardContent } from "@/components/ui/card";
