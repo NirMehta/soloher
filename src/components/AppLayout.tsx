@@ -10,7 +10,7 @@ const AppLayout = () => (
         <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-hero">
           <Globe className="h-4 w-4 text-primary-foreground" />
         </div>
-        <h1 className="font-display text-lg sm:text-xl text-foreground">SoloHer</h1>
+        <span className="font-display text-lg sm:text-xl text-foreground">SoloHer</span>
       </div>
     </header>
 

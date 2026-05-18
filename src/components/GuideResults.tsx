@@ -114,7 +114,7 @@ const GuideResults = ({ guide }: { guide: GuideData }) => {
           <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
         </div>
         <div>
-          <h2 className="font-display text-xl sm:text-2xl text-foreground">{guide.place}</h2>
+          <h1 className="font-display text-xl sm:text-2xl text-foreground">{guide.place}</h1>
           <p className="text-xs sm:text-sm text-muted-foreground">{guide.city}</p>
         </div>
       </div>
