@@ -88,6 +88,7 @@ const SavedGuidesPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
