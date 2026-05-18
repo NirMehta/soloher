@@ -1,0 +1,9 @@
+# SoloHer
+
+> AI-powered travel confidence guides for solo women travelers. Privacy-first, no account required.
+
+## Pages
+
+- [/](/): Plan a trip — enter a destination and get a personalized safety and confidence guide.
+- [/guide](/guide): View your AI-generated travel guide with safety insights, practical tips, and offline save options.
+- [/saved](/saved): Access your saved guides for offline reading, even without an internet connection.
