@@ -36,7 +36,7 @@ const SavedGuidesPage = () => {
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <Inbox className="h-12 w-12 text-muted-foreground/30 mb-3" />
           <p className="text-sm text-muted-foreground font-medium">No saved guides yet</p>
-          <p className="text-xs text-muted-foreground/60 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             Save a guide before your next trip — it'll be available even without signal
           </p>
           <Button variant="hero" className="mt-5" onClick={() => navigate("/")}>

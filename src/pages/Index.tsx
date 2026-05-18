@@ -112,7 +112,7 @@ const Index = () => {
                 <div className="text-center px-4">
                   <Globe className="mx-auto mb-3 h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground/30" />
                   <p className="text-sm sm:text-base text-muted-foreground font-medium">Your guide will appear here</p>
-                  <p className="mt-1 text-xs sm:text-sm text-muted-foreground/60">Enter a destination to get started</p>
+                  <p className="mt-1 text-xs sm:text-sm text-muted-foreground">Enter a destination to get started</p>
                 </div>
               </div>
             )}

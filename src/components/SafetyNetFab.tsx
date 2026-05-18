@@ -132,7 +132,7 @@ const SafetyNetFab = ({ emergencyNumber, safetyNet, city }: SafetyNetFabProps) =
               iconColor="text-accent"
             />
 
-            <p className="text-[11px] text-muted-foreground/60 leading-relaxed pt-2">
+            <p className="text-[11px] text-muted-foreground leading-relaxed pt-2">
               Safety insights are AI-generated and intended for guidance only. Always rely on local authorities and personal judgment in emergency situations.
             </p>
           </div>
