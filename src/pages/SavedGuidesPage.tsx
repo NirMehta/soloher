@@ -22,6 +22,10 @@ const SavedGuidesPage = () => {
         <title>Saved Guides — SoloHer</title>
         <meta name="description" content="Access your saved travel safety guides offline. Review confidence insights and emergency contacts anytime, anywhere." />
         <link rel="canonical" href="https://soloher.lovable.app/saved" />
+        <meta property="og:title" content="Saved Guides — SoloHer" />
+        <meta property="og:description" content="Access your saved travel safety guides offline. Review confidence insights and emergency contacts anytime, anywhere." />
+        <meta property="og:url" content="https://soloher.lovable.app/saved" />
+        <meta property="og:type" content="website" />
       </Helmet>
     <div className="px-4 py-6 sm:px-6 sm:py-8 max-w-lg mx-auto">
       <div className="flex items-center gap-2 mb-5">

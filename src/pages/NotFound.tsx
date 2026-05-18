@@ -14,6 +14,10 @@ const NotFound = () => {
       <Helmet>
         <title>Page Not Found — SoloHer</title>
         <meta name="description" content="Sorry, we couldn't find the page you're looking for. Explore travel confidence guides for solo female travelers on SoloHer." />
+        <meta property="og:title" content="Page Not Found — SoloHer" />
+        <meta property="og:description" content="Sorry, we couldn't find the page you're looking for. Explore travel confidence guides for solo female travelers on SoloHer." />
+        <meta property="og:url" content="https://soloher.lovable.app/" />
+        <meta property="og:type" content="website" />
       </Helmet>
     <div className="flex min-h-screen items-center justify-center bg-muted">
       <div className="text-center">

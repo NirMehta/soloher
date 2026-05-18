@@ -38,6 +38,10 @@ const Home = () => {
         <title>SoloHer — Travel Confidence for Solo Female Travelers</title>
         <meta name="description" content="AI-powered safety insights and practical tips for women traveling solo. Enter any destination and get a personalized travel confidence guide." />
         <link rel="canonical" href="https://soloher.lovable.app/" />
+        <meta property="og:title" content="SoloHer — Travel Confidence for Solo Female Travelers" />
+        <meta property="og:description" content="AI-powered safety insights and practical tips for women traveling solo. Enter any destination and get a personalized travel confidence guide." />
+        <meta property="og:url" content="https://soloher.lovable.app/" />
+        <meta property="og:type" content="website" />
       </Helmet>
     <div className="max-w-lg mx-auto">
       <ImSafeBanner />
