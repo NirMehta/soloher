@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import GuideResults, { GuideData } from "@/components/GuideResults";
 import SafetyNetFab from "@/components/SafetyNetFab";
 import { useSavedGuides } from "@/hooks/use-saved-guides";
@@ -73,8 +74,17 @@ const GuideResultsPage = () => {
   if (!guide) return null;
 
   const alreadySaved = isGuideSaved(guide);
+  const pageTitle = guide.place
+    ? `${guide.place}, ${guide.city} — SoloHer Guide`
+    : "Your Travel Guide — SoloHer";
 
   return (
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content="Personalized safety tips, local emergency numbers, and confidence insights for your solo travel destination." />
+        <link rel="canonical" href="https://soloher.lovable.app/guide" />
+      </Helmet>
     <div className="px-4 py-4 sm:px-6 sm:py-8 max-w-2xl mx-auto">
       {shareBanner && (
         <ShareConfirmBanner
@@ -132,6 +142,7 @@ const GuideResultsPage = () => {
         />
       )}
     </div>
+    </>
   );
 };
 

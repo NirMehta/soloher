@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useSavedGuides } from "@/hooks/use-saved-guides";
 import type { GuideData } from "@/components/GuideResults";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,6 +17,12 @@ const SavedGuidesPage = () => {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>Saved Guides — SoloHer</title>
+        <meta name="description" content="Access your saved travel safety guides offline. Review confidence insights and emergency contacts anytime, anywhere." />
+        <link rel="canonical" href="https://soloher.lovable.app/saved" />
+      </Helmet>
     <div className="px-4 py-6 sm:px-6 sm:py-8 max-w-lg mx-auto">
       <div className="flex items-center gap-2 mb-5">
         <BookmarkCheck className="h-5 w-5 text-accent" />
@@ -81,6 +88,7 @@ const SavedGuidesPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
