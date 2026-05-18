@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import GuideResults, { GuideData } from "@/components/GuideResults";
 import SafetyNetFab from "@/components/SafetyNetFab";
 import { useSavedGuides } from "@/hooks/use-saved-guides";
