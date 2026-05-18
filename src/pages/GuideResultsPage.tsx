@@ -74,6 +74,9 @@ const GuideResultsPage = () => {
   if (!guide) return null;
 
   const alreadySaved = isGuideSaved(guide);
+  const pageTitle = guide.place
+    ? `${guide.place}, ${guide.city} — SoloHer Guide`
+    : "Your Travel Guide — SoloHer";
 
   return (
     <div className="px-4 py-4 sm:px-6 sm:py-8 max-w-2xl mx-auto">
