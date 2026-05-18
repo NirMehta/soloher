@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Shield, Sun, Bus, Lightbulb, MapPin, Clock, Car, CheckCircle2, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -74,7 +74,7 @@ const CollapsibleSection = ({
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen((v) => !v); } }}
     >
       <CardHeader className="p-4 sm:p-5 pb-0 sm:pb-0">
-        <CardTitle className="flex items-center justify-between text-sm sm:text-base font-body font-semibold">
+        <h2 className="text-2xl font-semibold leading-none tracking-tight flex items-center justify-between text-sm sm:text-base font-body font-semibold">
           <span className="flex items-center gap-2 min-w-0">
             <Icon className={cn("h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0", color)} />
             <span className="truncate">{title}</span>
@@ -85,7 +85,7 @@ const CollapsibleSection = ({
               open && "rotate-180"
             )}
           />
-        </CardTitle>
+        </h2>
       </CardHeader>
       <CardContent className="p-4 pt-2 sm:p-5 sm:pt-2 overflow-hidden">
         {!open ? (
@@ -114,7 +114,7 @@ const GuideResults = ({ guide }: { guide: GuideData }) => {
           <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
         </div>
         <div>
-          <h2 className="font-display text-xl sm:text-2xl text-foreground">{guide.place}</h2>
+          <h1 className="font-display text-xl sm:text-2xl text-foreground">{guide.place}</h1>
           <p className="text-xs sm:text-sm text-muted-foreground">{guide.city}</p>
         </div>
       </div>
@@ -122,10 +122,10 @@ const GuideResults = ({ guide }: { guide: GuideData }) => {
       {/* Safety Snapshot Card */}
       <Card className="shadow-card border-primary/20 bg-card overflow-hidden">
         <CardHeader className="p-4 pb-3 sm:p-6 sm:pb-4 bg-gradient-to-r from-primary/5 to-accent/5">
-          <CardTitle className="flex items-center gap-2 text-sm sm:text-base font-body font-semibold">
+          <h2 className="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2 text-sm sm:text-base font-body font-semibold">
             <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
             Safety Snapshot
-          </CardTitle>
+          </h2>
         </CardHeader>
         <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0 space-y-4">
           <div className="flex flex-wrap gap-2 pt-3">
