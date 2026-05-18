@@ -84,6 +84,10 @@ const GuideResultsPage = () => {
         <title>{pageTitle}</title>
         <meta name="description" content="Personalized safety tips, local emergency numbers, and confidence insights for your solo travel destination." />
         <link rel="canonical" href="https://soloher.lovable.app/guide" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content="Personalized safety tips, local emergency numbers, and confidence insights for your solo travel destination." />
+        <meta property="og:url" content="https://soloher.lovable.app/guide" />
+        <meta property="og:type" content="article" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Article",
