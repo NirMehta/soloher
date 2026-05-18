@@ -84,6 +84,18 @@ const GuideResultsPage = () => {
         <title>{pageTitle}</title>
         <meta name="description" content="Personalized safety tips, local emergency numbers, and confidence insights for your solo travel destination." />
         <link rel="canonical" href="https://soloher.lovable.app/guide" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": pageTitle,
+          "description": "Personalized safety tips, local emergency numbers, and confidence insights for your solo travel destination.",
+          "about": `${guide.place}, ${guide.city}`,
+          "publisher": {
+            "@type": "Organization",
+            "name": "SoloHer",
+            "url": "https://soloher.lovable.app"
+          }
+        })}</script>
       </Helmet>
     <div className="px-4 py-4 sm:px-6 sm:py-8 max-w-2xl mx-auto">
       {shareBanner && (
