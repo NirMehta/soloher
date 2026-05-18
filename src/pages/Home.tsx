@@ -33,6 +33,12 @@ const Home = () => {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>SoloHer — Travel Confidence for Solo Female Travelers</title>
+        <meta name="description" content="AI-powered safety insights and practical tips for women traveling solo. Enter any destination and get a personalized travel confidence guide." />
+        <link rel="canonical" href="https://soloher.lovable.app/" />
+      </Helmet>
     <div className="max-w-lg mx-auto">
       <ImSafeBanner />
       <div className="px-4 py-6 sm:px-6 sm:py-12">
