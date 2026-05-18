@@ -14,8 +14,9 @@ const AppLayout = () => (
       </div>
     </header>
 
-    <Outlet />
-    <BottomNav />
+    <main>
+      <Outlet />
+    </main>
   </div>
 );
 
