@@ -79,6 +79,12 @@ const GuideResultsPage = () => {
     : "Your Travel Guide — SoloHer";
 
   return (
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content="Personalized safety tips, local emergency numbers, and confidence insights for your solo travel destination." />
+        <link rel="canonical" href="https://soloher.lovable.app/guide" />
+      </Helmet>
     <div className="px-4 py-4 sm:px-6 sm:py-8 max-w-2xl mx-auto">
       {shareBanner && (
         <ShareConfirmBanner
