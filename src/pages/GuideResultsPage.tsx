@@ -150,6 +150,8 @@ const GuideResultsPage = () => {
           <Share2 className="h-4 w-4 mr-2" />
           Share My Plan
         </Button>
+        <FeedbackDialog destination={`${guide.place}, ${guide.city}`} />
+
       </div>
 
       {guide.emergencyNumber && guide.safetyNet && (
