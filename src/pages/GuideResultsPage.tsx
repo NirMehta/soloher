@@ -9,6 +9,8 @@ import { ArrowLeft, Bookmark, BookmarkCheck, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { saveSharedPlan } from "@/hooks/use-shared-plan";
 import ShareConfirmBanner from "@/components/ShareConfirmBanner";
+import FeedbackDialog from "@/components/FeedbackDialog";
+
 
 const GuideResultsPage = () => {
   const [guide, setGuide] = useState<GuideData | null>(null);
@@ -148,6 +150,8 @@ const GuideResultsPage = () => {
           <Share2 className="h-4 w-4 mr-2" />
           Share My Plan
         </Button>
+        <FeedbackDialog destination={`${guide.place}, ${guide.city}`} />
+
       </div>
 
       {guide.emergencyNumber && guide.safetyNet && (
