@@ -8,6 +8,42 @@ import { Globe, ShieldCheck } from "lucide-react";
 import type { GuideData } from "@/components/GuideResults";
 import ImSafeBanner from "@/components/ImSafeBanner";
 
+const faqs = [
+  {
+    question: "Is it safe to travel alone as a woman?",
+    answer:
+      "Safety is highly destination- and situation-dependent, so there is no universal yes or no answer. SoloHer gives you a confidence read (High, Moderate, or Low) for your specific destination and time, plus practical guidance to support your judgment — not replace it.",
+  },
+  {
+    question: "What are the best travel safety tips for women?",
+    answer:
+      "The strongest habits span planning ahead, staying reachable, trusting local guidance, and keeping your instincts sharp. For destination-specific detail, generate a SoloHer guide and check the safety cards tailored to where you're going.",
+  },
+  {
+    question: "Which destinations are safest for solo female travelers?",
+    answer:
+      "Safety varies more by city and region than by country alone. SoloHer's safety snapshots are built to reflect that nuance, so you get a confidence level and notes grounded in the exact place and time you plan to visit.",
+  },
+  {
+    question: "How does SoloHer help solo female travelers?",
+    answer:
+      "SoloHer creates AI-powered safety snapshots for any destination, lets you share your plan with someone you trust, and gently nudges you to check in as 'I'm Safe' after your trip — all framed around confidence and connection, not surveillance or restriction.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -42,6 +78,7 @@ const Home = () => {
         <meta property="og:description" content="AI-powered safety insights and practical tips for women traveling solo. Enter any destination and get a personalized travel confidence guide." />
         <meta property="og:url" content="https://soloher.lovable.app/" />
         <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
     <div className="max-w-lg mx-auto">
       <ImSafeBanner />
@@ -66,6 +103,19 @@ const Home = () => {
         <h2 className="font-display text-lg text-foreground mb-4 sm:mb-5">Plan Your Visit</h2>
         <TravelForm onSubmit={handleSubmit} isLoading={isLoading} />
       </div>
+
+      {/* FAQ */}
+      <section className="mt-6 sm:mt-10 rounded-2xl border border-border/60 bg-card p-4 sm:p-6 shadow-card">
+        <h2 className="font-display text-lg text-foreground mb-4 sm:mb-5">Questions solo travelers ask</h2>
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index}>
+              <h3 className="font-display text-base text-foreground mb-1">{faq.question}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
       </div>
     </div>
     </>
