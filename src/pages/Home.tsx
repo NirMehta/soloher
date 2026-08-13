@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import TravelForm from "@/components/TravelForm";
 import { supabase } from "@/integrations/supabase/client";
@@ -114,6 +114,11 @@ const Home = () => {
               <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{faq.answer}</p>
             </div>
           ))}
+        </div>
+        <div className="mt-4 pt-4 border-t border-border/60">
+          <Link to="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            More questions? See our full FAQ →
+          </Link>
         </div>
       </section>
       </div>

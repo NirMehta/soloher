@@ -7,6 +7,7 @@ import AppLayout from "@/components/AppLayout";
 import Home from "@/pages/Home";
 import GuideResultsPage from "@/pages/GuideResultsPage";
 import SavedGuidesPage from "@/pages/SavedGuidesPage";
+import FAQPage from "@/pages/FAQPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/guide" element={<GuideResultsPage />} />
             <Route path="/saved" element={<SavedGuidesPage />} />
+            <Route path="/faq" element={<FAQPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
